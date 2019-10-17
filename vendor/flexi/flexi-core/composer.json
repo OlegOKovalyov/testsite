@@ -1,0 +1,21 @@
+{
+    "name": "flexi/flexi-core",
+    "description": "Special module for wordpress development",
+    "authors": [
+        {
+            "name": "Nikita Shvydkyi",
+            "email": "nicograis@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flexi\\": "Flexi/"
+        },
+        "files": [
+            "Flexi/Flexi.php"
+        ]
+    }
+}

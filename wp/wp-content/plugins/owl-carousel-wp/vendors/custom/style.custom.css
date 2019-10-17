@@ -1,0 +1,53 @@
+.tcowl-wrap .owl-theme .owl-nav.disabled + .owl-dots {
+  margin-top: 10px;
+}
+.tcowl-wrap .owl-theme .owl-dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+ }
+ .tcowl-wrap .owl-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+  }
+.tcowl-wrap .owl-theme .owl-dots .owl-dot span {
+      width: 10px;
+      height: 10px;
+      margin:20px 7px;
+      display: block;
+      -webkit-backface-visibility: visible;
+      transition: opacity 200ms ease;
+      border-radius: 30px;
+   }
+
+/* Ends Dots Style */
+/* nav style two  top-right */
+.tcowl-wrap .tcowl-nav {
+  position: relative;
+}
+.tcowl-wrap .tcowl-nav .owl-controls .owl-next,
+.tcowl-wrap .tcowl-nav .owl-controls .owl-prev {
+  position: absolute;
+  top: -46px;
+  z-index: 2;
+}
+.tcowl-wrap .tcowl-nav .owl-controls .owl-next {
+ right: 0;
+}
+.tcowl-wrap .tcowl-nav .owl-controls .owl-prev {
+right:31px;
+}
+.tcowl-wrap .tcowl-nav .owl-controls .owl-nav [class*=owl-] {
+  color: #fff;
+  font-size:20px;
+  margin: 5px;
+  display: inline-block;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  padding: 2px;
+}
+.tcowl-wrap .tcowl-nav  .owl-controls .owl-nav [class*=owl-]:hover {
+    color: #fff;
+}
