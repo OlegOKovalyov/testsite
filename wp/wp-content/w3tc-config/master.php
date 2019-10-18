@@ -8,7 +8,7 @@
     "cluster.messagebus.sns.topic_arn": "",
     "dbcache.configuration_overloaded": false,
     "dbcache.debug": false,
-    "dbcache.enabled": false,
+    "dbcache.enabled": true,
     "dbcache.engine": "file",
     "dbcache.file.gc": 3600,
     "dbcache.file.locking": false,
@@ -98,7 +98,7 @@
     "objectcache.lifetime": 180,
     "objectcache.purge.all": false,
     "pgcache.configuration_overloaded": false,
-    "pgcache.enabled": false,
+    "pgcache.enabled": true,
     "pgcache.comment_cookie_ttl": 1800,
     "pgcache.debug": false,
     "pgcache.engine": "file_generic",
@@ -144,24 +144,40 @@
         "wp-links-opml.php",
         "wp-locations.php"
     ],
-    "pgcache.accept.qs": [],
+    "pgcache.accept.qs": [
+        ""
+    ],
     "pgcache.late_init": false,
     "pgcache.late_caching": false,
     "pgcache.mirrors.enabled": false,
-    "pgcache.mirrors.home_urls": [],
+    "pgcache.mirrors.home_urls": [
+        ""
+    ],
     "pgcache.reject.front_page": false,
     "pgcache.reject.logged": true,
-    "pgcache.reject.logged_roles": false,
-    "pgcache.reject.roles": [],
+    "pgcache.reject.logged_roles": true,
+    "pgcache.reject.roles": [
+        "administrator"
+    ],
     "pgcache.reject.uri": [
         "wp-.*\\.php",
         "index\\.php"
     ],
-    "pgcache.reject.categories": [],
-    "pgcache.reject.tags": [],
-    "pgcache.reject.authors": [],
-    "pgcache.reject.custom": [],
-    "pgcache.reject.ua": [],
+    "pgcache.reject.categories": [
+        ""
+    ],
+    "pgcache.reject.tags": [
+        ""
+    ],
+    "pgcache.reject.authors": [
+        ""
+    ],
+    "pgcache.reject.custom": [
+        ""
+    ],
+    "pgcache.reject.ua": [
+        ""
+    ],
     "pgcache.reject.cookie": [
         "wptouch_switch_toggle"
     ],
@@ -183,13 +199,15 @@
         "rss2"
     ],
     "pgcache.purge.postpages_limit": 10,
-    "pgcache.purge.pages": [],
+    "pgcache.purge.pages": [
+        ""
+    ],
     "pgcache.purge.sitemap_regex": "([a-z0-9_\\-]*?)sitemap([a-z0-9_\\-]*)?\\.xml",
-    "pgcache.prime.enabled": false,
-    "pgcache.prime.interval": 900,
+    "pgcache.prime.enabled": true,
+    "pgcache.prime.interval": 90,
     "pgcache.prime.limit": 10,
     "pgcache.prime.sitemap": "",
-    "pgcache.prime.post.enabled": false,
+    "pgcache.prime.post.enabled": true,
     "pgcache.rest": "",
     "pgcache.cookiegroups.enabled": false,
     "pgcache.cookiegroups.groups": {
@@ -226,7 +244,7 @@
     "stats.access_log.format": "%h %l %u %t \\\"%r\\\" %>s %O \\\"%{Referer}i\\\" \\\"%{User-Agent}i\\\"",
     "stats.access_log.webserver": "apache",
     "minify.configuration_overloaded": false,
-    "minify.enabled": false,
+    "minify.enabled": true,
     "minify.auto": true,
     "minify.debug": false,
     "minify.engine": "file",
@@ -266,15 +284,15 @@
     "minify.css.enable": true,
     "minify.css.engine": "css",
     "minify.css.http2push": false,
-    "minify.css.strip.comments": false,
-    "minify.css.strip.crlf": false,
+    "minify.css.strip.comments": true,
+    "minify.css.strip.crlf": true,
     "minify.css.embed": false,
     "minify.css.imports": "",
     "minify.css.groups": [],
     "minify.js.http2push": false,
     "minify.js.enable": true,
     "minify.js.engine": "js",
-    "minify.js.combine.header": false,
+    "minify.js.combine.header": true,
     "minify.js.header.embed_type": "blocking",
     "minify.js.combine.body": false,
     "minify.js.body.embed_type": "blocking",
@@ -317,10 +335,18 @@
     "minify.htmltidy.options.hide-comments": true,
     "minify.htmltidy.options.wrap": 0,
     "minify.reject.logged": false,
-    "minify.reject.ua": [],
-    "minify.reject.uri": [],
-    "minify.reject.files.js": [],
-    "minify.reject.files.css": [],
+    "minify.reject.ua": [
+        ""
+    ],
+    "minify.reject.uri": [
+        ""
+    ],
+    "minify.reject.files.js": [
+        ""
+    ],
+    "minify.reject.files.css": [
+        ""
+    ],
     "minify.cache.files": [
         ""
     ],
@@ -493,7 +519,9 @@
     "varnish.configuration_overloaded": false,
     "varnish.enabled": false,
     "varnish.debug": false,
-    "varnish.servers": [],
+    "varnish.servers": [
+        ""
+    ],
     "browsercache.configuration_overloaded": false,
     "browsercache.enabled": true,
     "browsercache.rewrite": false,
@@ -512,12 +540,12 @@
     "browsercache.cssjs.cache.policy": "cache_public_maxage",
     "browsercache.cssjs.etag": true,
     "browsercache.cssjs.w3tc": false,
-    "browsercache.cssjs.replace": false,
+    "browsercache.cssjs.replace": true,
     "browsercache.cssjs.querystring": false,
     "browsercache.html.compression": true,
     "browsercache.html.brotli": false,
     "browsercache.html.last_modified": true,
-    "browsercache.html.expires": false,
+    "browsercache.html.expires": true,
     "browsercache.html.lifetime": 3600,
     "browsercache.html.cache.control": false,
     "browsercache.html.cache.policy": "cache_public_maxage",
@@ -534,9 +562,11 @@
     "browsercache.other.cache.policy": "cache_public_maxage",
     "browsercache.other.etag": true,
     "browsercache.other.w3tc": false,
-    "browsercache.other.replace": false,
+    "browsercache.other.replace": true,
     "browsercache.other.querystring": false,
-    "browsercache.replace.exceptions": [],
+    "browsercache.replace.exceptions": [
+        ""
+    ],
     "browsercache.security.session.cookie_httponly": "",
     "browsercache.security.session.cookie_secure": "",
     "browsercache.security.session.use_only_cookies": "",
@@ -554,7 +584,7 @@
     "browsercache.security.pkp.extra": "maxage",
     "browsercache.security.pkp.report.url": "",
     "browsercache.security.pkp.report.only": "0",
-    "browsercache.security.referrer.policy": "false",
+    "browsercache.security.referrer.policy": true,
     "browsercache.security.referrer.policy.directive": "no-referrer-when-downgrade",
     "browsercache.security.csp": false,
     "browsercache.security.csp.base": "",
@@ -849,5 +879,8 @@
     },
     "extensions.active_frontend": [],
     "plugin.license_key": "",
-    "plugin.type": ""
+    "plugin.type": "",
+    "fragmentcache": {
+        "engine": ""
+    }
 }
