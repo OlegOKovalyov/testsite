@@ -220,7 +220,154 @@ function createTaxonomyTypes() {
         'show_in_nav_menus'          => true,
         'show_tagcloud'              => true,
     );
-    register_taxonomy( 'taxonomy', array( 'services' ), $args );
+    register_taxonomy( 'taxonomy', array( 'services', 'page' ), $args );
 
 }
 add_action( 'init', 'createTaxonomyTypes', 0 );
+
+/**
+ * Shortcode-1 to list all cervices (WP_Query)
+ */
+add_shortcode( 'list-services-1', 'testheme_post_listing_shortcode1' );
+function testheme_post_listing_shortcode1( $atts ) {
+    ob_start();
+    $query = new WP_Query( array(
+        'post_type' => 'services',
+        'posts_per_page' => -1,
+        'order' => 'ASC',
+        'orderby' => 'title',
+    ) );
+    if ( $query->have_posts() ) { ?>
+        <ul class="services-listing">
+            <?php while ( $query->have_posts() ) : $query->the_post(); ?>
+            <li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            </li>
+            <?php endwhile;
+            wp_reset_postdata(); ?>
+        </ul>
+    <?php $myvariable = ob_get_clean();
+        wp_reset_postdata();
+    return $myvariable;
+    }
+}
+
+/**
+ * Shortcode-2 to list all cervices (get_posts())
+ */
+add_shortcode( 'list-services-2', 'testheme_post_listing_shortcode2' );
+function testheme_post_listing_shortcode2( $atts ) {
+    ob_start();
+    $posts = get_posts([
+        'post_type'  => 'services',
+        'numberposts' => -1,
+        'order'      => 'ASC',
+        'orderby'   => 'title',
+    ]); ?>
+    <ul class="services-listing">
+    <?php foreach( $posts as $post ){
+        setup_postdata($post); ?>
+        <li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <a href="<?php echo $post->guid; ?>"><?php echo $post->post_title; ?></a>
+        </li>
+        <?php wp_reset_postdata();
+    } ?>
+    </ul>
+    <?php $myvariable = ob_get_clean();
+    wp_reset_postdata();
+    return $myvariable;
+}
+
+
+/**
+ * Textbox Metabox for Services Post Type
+ */
+/* Add Metabox */
+add_action( 'add_meta_boxes', 'addCheckboxMetaBox' );
+function addCheckboxMetaBox() {
+    add_meta_box(
+        'company_name',
+        'Company Name:',
+        'showCheckboxMetaBox',
+        ['services'],
+        'normal',
+        'high'
+    );
+}
+/* Show Metabox */
+function showCheckboxMetaBox($post) {
+    ob_start();
+    $company_name = 'company_name';
+    $company_name_v = get_post_meta($post->ID, $company_name, true);
+    ?>
+
+    <input type="text" name="<?php _e($company_name); ?>" value="<?php _e($company_name_v); ?>" class="widefat">
+
+    <?php
+    $html = ob_get_contents();
+    ob_end_clean();
+
+    _e($html);
+}
+/* Save Metabox */
+add_action('save_post', 'saveCheckboxMetaBox', 10, 2);
+function saveCheckboxMetaBox ($post_id, $post) {
+    if (!isset( $_POST['company_name']))
+        return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return;
+    if (!current_user_can( 'edit_post', $post_id))
+        return;
+    if ($post->post_type != 'services') {
+        return;
+    }
+    $company_name_v = sanitize_text_field(isset($_POST['company_name']) ? $_POST['company_name'] : '');
+    update_post_meta($post_id, 'company_name', $company_name_v);
+    return $post_id;
+}
+
+
+/**
+ * Checkbox Metabox for Services Post Type
+ */
+add_action( 'add_meta_boxes', 'add_checkbox_box' );
+function add_checkbox_box( $post ) {
+    add_meta_box(
+        'Meta Box', // ID, should be a string.
+        'Company Service Not Availbale?', // Meta Box Title.
+        'checkbox_meta_box', // Your call back function, this is where your form field will go.
+        'services', // The post type you want this to show up on, can be post, page, or custom post type.
+        'normal', // The placement of your meta box, can be normal or side.
+        'high' // The priority in which this will be displayed.
+    );
+}
+function checkbox_meta_box($post) {
+    wp_nonce_field( 'my_awesome_nonce', 'awesome_nonce' );
+    $checkboxMeta = get_post_meta( $post->ID );
+    ?>
+
+    <input type="checkbox" name="not_available" id="not_available" value="yes" <?php if ( isset ( $checkboxMeta['not_available'] ) ) checked( $checkboxMeta['not_available'][0], 'yes' ); ?> />Not Available<br />
+
+<?php }
+add_action( 'save_post', 'save_people_checkboxes' );
+function save_people_checkboxes( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+        return;
+    if ( ( isset ( $_POST['my_awesome_nonce'] ) ) && ( ! wp_verify_nonce( $_POST['my_awesome_nonce'], plugin_basename( __FILE__ ) ) ) )
+        return;
+    if ( ( isset ( $_POST['post_type'] ) ) && ( 'page' == $_POST['post_type'] )  ) {
+        if ( ! current_user_can( 'edit_page', $post_id ) ) {
+            return;
+        }
+    } else {
+        if ( ! current_user_can( 'edit_post', $post_id ) ) {
+            return;
+        }
+    }
+    //saves not_available's value
+    if( isset( $_POST[ 'not_available' ] ) ) {
+        update_post_meta( $post_id, 'not_available', 'yes' );
+    } else {
+        update_post_meta( $post_id, 'not_available', 'no' );
+    }
+}

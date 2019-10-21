@@ -1,3 +1,40 @@
 body {
     background-color: #f7e3d3;
 }
+
+.main-navigation .menu {
+    display: flex;
+    width: 1440px;
+    justify-content: space-between;
+}
+.site-content {
+    display: flex;
+}
+
+.content-area {
+    width: 66%;
+}
+
+.widget-area {
+    width: 33%;
+}
+
+footer {
+    display: flex; justify-content: center
+}
+
+.site-info {
+    width: 1440px;
+}
+
+footer h3 {
+    display: flex; justify-content: center;
+}
+
+.footer-widgets {
+    display: flex; justify-content: space-between
+}
+
+._51mz ._51mw {
+    /*display: none;*/
+}

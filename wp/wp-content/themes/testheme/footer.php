@@ -6,10 +6,10 @@
 
 	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer"  style="display: flex; justify-content: center">
-		<div class="site-info" style="width: 1440px;">
-            <h3 style=" display: flex; justify-content: center;">This is The Footer</h3>
-            <div class="footer-widgets" style="display: flex; justify-content: space-between">
+	<footer id="colophon" class="site-footer">
+		<div class="site-info">
+            <h3>This is The Footer</h3>
+            <div class="footer-widgets"">
                 <?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
                     <div id="true-foot" class="sidebar">
                         <?php dynamic_sidebar( 'sidebar-2' ); ?>
