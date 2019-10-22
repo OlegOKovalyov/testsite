@@ -1,7 +1,7 @@
 jQuery(document).ready(function ($) {
 
     // Контейнер с контентом
-    var $mainBox = $('.site-main');
+    let $mainBox = $('.site-main');
 
     // Отправка ajax запроса при клике по ссылке на рубрику в виджете "Рубрики"
     $('.type-services a, .primary-menu a').click(function (e) {
@@ -33,7 +33,7 @@ jQuery(document).ready(function ($) {
         $mainBox.animate({opacity: 0.5}, 300);
 
         jQuery.post(
-            myPlugin.ajaxurl,
+            localizeScriptObject.ajaxurl,
             {
                 action: 'get_cat',
                 link: linkCat

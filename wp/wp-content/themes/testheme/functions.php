@@ -2,6 +2,34 @@
 /**
  * testheme functions and definitions
  */
+
+function wpb_cookies_tutorial2() {
+    // Time of user's visit
+    $visit_time5 = date('F j, Y g:i a');
+    // Check if cookie is already set
+    if(isset($_COOKIE['visit_time5'])) {
+        // Do this if cookie is set
+        function visitor_greeting() {
+           return;
+        }
+    } else {
+        // Do this if the cookie doesn't exist
+        function visitor_greeting() {
+            do_shortcode('[spu popup=""]Welcome to our system![/spu]');
+            // Working Pop-up with alert() JavaScript function:
+            /*$alert = isset( $_COOKIE['visit_time5'] ) ? $_COOKIE['visit_time5'] : 'Welcome to our system!';
+            echo "<script type='text/javascript'>alert('$alert')</script>";*/
+        }
+    }
+    add_shortcode('greet_me', 'visitor_greeting');
+    // Set or Reset the cookie
+    setcookie('visit_time5',  $visit_time5, time() + ( 7 * DAY_IN_SECONDS ) );
+}
+add_action('init', 'wpb_cookies_tutorial2');
+
+/**
+ * Testheme Setup
+ */
 if ( ! function_exists( 'testheme_setup' ) ) :
 	function testheme_setup() {
 		load_theme_textdomain( 'testheme', get_template_directory() . '/languages' );
@@ -241,7 +269,7 @@ function testheme_post_listing_shortcode1( $atts ) {
         <ul class="services-listing">
             <?php while ( $query->have_posts() ) : $query->the_post(); ?>
             <li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <a  data-id="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
             </li>
             <?php endwhile;
             wp_reset_postdata(); ?>
@@ -270,7 +298,7 @@ function testheme_post_listing_shortcode2( $atts ) {
         <li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
             <a href="<?php echo $post->guid; ?>"><?php echo $post->post_title; ?></a>
         </li>
-        <?php wp_reset_postdata();
+        <?php //wp_reset_postdata();
     } ?>
     </ul>
     <?php $myvariable = ob_get_clean();
